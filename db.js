@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize')
-
+require('dotenv').config();
 // Database
 const sequelize = new Sequelize(
-  '', // TODO: database connection string
+  process.env.DATABASE_URL, // TODO: database connection string
   {
     dialect: 'postgres',
     dialectOptions: {
@@ -10,6 +10,7 @@ const sequelize = new Sequelize(
         require: true,
         rejectUnauthorized: false,
       },
+      connectTimeout: 60000 // 60 seconds
     },
     define: {
       createdAt: 'added',
